@@ -75,7 +75,7 @@ jobs:
           docker build -t ${{ secrets.ARTIFACT_REGISTRY }}/myapp:latest .
           docker push ${{ secrets.ARTIFACT_REGISTRY }}/myapp:latest
 
-  Deploy QA-HEROKU:
+  Deploy_QA_HEROKU:
     needs: Build
     runs-on: ubuntu-latest
 
@@ -88,9 +88,10 @@ jobs:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
 
-  Deploy PROD-GCP:
-    needs: Build
+  Deploy_PROD_GCP:
+    needs: Deploy_QA_HEROKU
     runs-on: ubuntu-latest
+    
       - name: Auth GCP AppEngine
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
