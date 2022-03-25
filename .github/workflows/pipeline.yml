@@ -92,6 +92,7 @@ jobs:
     needs: Deploy_QA_HEROKU
     runs-on: ubuntu-latest
     
+    steps:
       - name: Auth GCP AppEngine
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
