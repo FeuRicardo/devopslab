@@ -91,8 +91,11 @@ jobs:
   Deploy_PROD_GCP:
     needs: Deploy_QA_HEROKU
     runs-on: ubuntu-latest
-    
+
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
       - name: Auth GCP AppEngine
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
